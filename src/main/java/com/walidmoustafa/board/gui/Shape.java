@@ -9,8 +9,8 @@ package com.walidmoustafa.board.gui;/*
 
 import java.awt.*;
 
-public interface Shape {
+interface Shape {
 
-    public void draw(Graphics gfx);
+    void draw(Graphics gfx);
 
 }

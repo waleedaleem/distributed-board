@@ -13,8 +13,8 @@ import java.io.Serializable;
 public class Line implements Shape, Serializable {
 
     private static final long serialVersionUID = 1L;
-    Point startPoint;
-    Point endPoint;
+    private final Point startPoint;
+    private final Point endPoint;
 
     public Line(Point sPoint, Point ePoint) {
         startPoint = sPoint;

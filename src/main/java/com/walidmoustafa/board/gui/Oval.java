@@ -11,12 +11,12 @@ import java.awt.*;
 import java.io.Serializable;
 
 public class Oval implements Shape, Serializable {
-    static final int UNFILLED = 0;
+    private static final int UNFILLED = 0;
     private static final long serialVersionUID = 1L;
-    Point startPoint;
-    Point endPoint;
-    int mode;
-    Color color;
+    private final Point startPoint;
+    private final Point endPoint;
+    private final int mode;
+    private final Color color;
 
     public Oval(Point sPoint, Point ePoint, int currentMode, Color currentColor) {
         startPoint = sPoint;

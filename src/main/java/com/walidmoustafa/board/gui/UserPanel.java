@@ -24,13 +24,13 @@ import javax.swing.event.ListSelectionListener;
 public class UserPanel extends JPanel implements ActionListener, ListSelectionListener, KeyListener {
 
     private static final long serialVersionUID = 1L;
-    BoardServer boardServer;
-    String userID;
-    JScrollPane scrollPane;
-    JList<String> usersList;
-    JButton bounceButton;
-    Vector<String> userIDs = new Vector<String>();
-    String selectedUser;
+    private final BoardServer boardServer;
+    private final String userID;
+    private final JScrollPane scrollPane;
+    private final JList<String> usersList;
+    private JButton bounceButton;
+    private final Vector<String> userIDs = new Vector<>();
+    private String selectedUser;
 
     public UserPanel(BoardServer bServer, String uID, JScrollPane sPane) {
         boardServer = bServer;
@@ -45,7 +45,7 @@ public class UserPanel extends JPanel implements ActionListener, ListSelectionLi
             bounceButton.addActionListener(this);
         }
 
-        usersList = new JList<String>(userIDs);
+        usersList = new JList<>(userIDs);
         UserListRenderer renderer = new UserListRenderer();
         usersList.setCellRenderer(renderer);
         add(usersList, BorderLayout.CENTER);
@@ -73,7 +73,7 @@ public class UserPanel extends JPanel implements ActionListener, ListSelectionLi
     @Override
     public void valueChanged(ListSelectionEvent event) {
         if (event.getSource() == usersList && !event.getValueIsAdjusting()) {
-            String stringValue = (String) usersList.getSelectedValue();
+            String stringValue = usersList.getSelectedValue();
             if (stringValue != null) {
                 selectedUser = stringValue;
                 if (bounceButton != null) {

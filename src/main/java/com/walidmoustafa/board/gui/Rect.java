@@ -1,24 +1,24 @@
 package com.walidmoustafa.board.gui;
 
-/**
- * Name: Walid Moustafa
- * Student ID: 563080
- * Subject: COMP90015 - Distributed Systems
- * Assignment: Assignment 2 - Distributed Whiteboard
- * Project: com.walidmoustafa.board.App
- * File: com.walidmoustafa.board.gui.Rect.java
+/*
+  Name: Walid Moustafa
+  Student ID: 563080
+  Subject: COMP90015 - Distributed Systems
+  Assignment: Assignment 2 - Distributed Whiteboard
+  Project: com.walidmoustafa.board.App
+  File: com.walidmoustafa.board.gui.Rect.java
  */
 
 import java.awt.*;
 import java.io.Serializable;
 
 public class Rect implements Shape, Serializable {
-    static final int UNFILLED = 0;
+    private static final int UNFILLED = 0;
     private static final long serialVersionUID = 1L;
-    Point startPoint;
-    Point endPoint;
-    int mode;
-    Color color;
+    private final Point startPoint;
+    private final Point endPoint;
+    private final int mode;
+    private final Color color;
 
 
     public Rect(Point sPoint, Point ePoint, int currentMode, Color currentColor) {

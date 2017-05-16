@@ -15,7 +15,7 @@ import java.awt.Component;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.JList;
 
-public class UserListRenderer extends DefaultListCellRenderer {
+class UserListRenderer extends DefaultListCellRenderer {
 
     private static final long serialVersionUID = 1L;
 

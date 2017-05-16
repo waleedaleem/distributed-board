@@ -26,9 +26,9 @@ public class App {
     public static String adminID;
     public static boolean isAdmin;
     public static SharedPanel sharedPanel;
-    static String serverName = "localhost";
-    static String serviceName = "BoardServer";
-    static UserPanel userPanel;
+    private static String serverName = "localhost";
+    private static String serviceName = "BoardServer";
+    private static UserPanel userPanel;
 
     private static void initialize() {
 
@@ -121,12 +121,9 @@ public class App {
             }
             userID = boardServer.joinBoard(candidateID);
             adminID = boardServer.getAdmin();
-            isAdmin = userID.equalsIgnoreCase(adminID) ? true : false;
+            isAdmin = userID.equalsIgnoreCase(adminID);
             System.out.println("Assigned userID " + userID);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-            System.exit(-1);
-        } catch (RemoteException e) {
+        } catch (MalformedURLException | RemoteException e) {
             e.printStackTrace();
             System.exit(-1);
         } catch (NotBoundException e) {
@@ -136,11 +133,7 @@ public class App {
 
         //Schedule a job for the event-dispatching thread:
         //creating and showing this application's GUI.
-        javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                initialize();
-            }
-        });
+        javax.swing.SwingUtilities.invokeLater(() -> initialize());
 
     }
 

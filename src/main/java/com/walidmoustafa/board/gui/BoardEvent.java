@@ -16,7 +16,7 @@ public class BoardEvent implements Serializable {
 
     private static final long serialVersionUID = 1L;
     public int eventID;
-    public String eventType;
+    public final String eventType;
     public String userID;
     public ArrayList<String> userList;
     public int currentShape;

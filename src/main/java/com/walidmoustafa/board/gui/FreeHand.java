@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 public class FreeHand implements Shape, Serializable {
     private static final long serialVersionUID = 1L;
-    private ArrayList<Point> points = new ArrayList<Point>();
+    private ArrayList<Point> points = new ArrayList<>();
 
     public FreeHand(ArrayList<Point> pts) {
         points = pts;

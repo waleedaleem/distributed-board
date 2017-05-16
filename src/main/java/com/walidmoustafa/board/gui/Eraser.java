@@ -15,17 +15,17 @@ import java.util.ArrayList;
 
 
 public class Eraser implements Shape, Serializable {
-    static final int seed = 3;
+    private static final int seed = 3;
     private static final long serialVersionUID = 1L;
     private int size = 1;
-    private ArrayList<Point> points = new ArrayList<Point>();
+    private ArrayList<Point> points = new ArrayList<>();
 
     public Eraser(ArrayList<Point> pts, int size) {
         this.size = size;
         points = pts;
     }
 
-    public static void erasePoint(Graphics gfx, int size, Point point) {
+    private static void erasePoint(Graphics gfx, int size, Point point) {
         size = size * seed;
         int x = (point.x - size) > 0 ? (point.x - size) : 0;
         int y = (point.y - size) > 0 ? (point.y - size) : 0;

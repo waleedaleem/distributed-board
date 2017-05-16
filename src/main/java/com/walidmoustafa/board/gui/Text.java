@@ -15,8 +15,8 @@ import java.util.ArrayList;
 public class Text implements Shape, Serializable {
 
     private static final long serialVersionUID = 1L;
-    Point startPoint;
-    ArrayList<String> lines = new ArrayList<String>();
+    private final Point startPoint;
+    private ArrayList<String> lines = new ArrayList<>();
 
     public Text(Point sPoint, ArrayList<String> input) {
         startPoint = sPoint;

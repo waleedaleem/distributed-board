@@ -25,26 +25,26 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class SharedPanel extends JPanel implements ActionListener, KeyListener {
 
-    public static final int UNFILLED = 0;
-    public static final int FILLED = 1;
+    private static final int UNFILLED = 0;
+    private static final int FILLED = 1;
     private static final long serialVersionUID = 1L;
-    final int LINE = 0;
-    final int RECT = 1;
-    final int OVAL = 2;
-    final int FREE = 3;
-    final int TEXT = 4;
-    BoardServer boardServer;
-    String userID;
-    JFrame mainFrame;
-    ArrayList<Shape> shapes = new ArrayList<Shape>();
-    Point startPoint = new Point(5, 10);
-    int currentShape = LINE;
-    int currentMode = UNFILLED;
-    Color currentColor = getForeground();
-    boolean erasing = false;
-    int eraserSize = 1;
-    ArrayList<Point> points;
-    ArrayList<String> textInput;
+    private final int LINE = 0;
+    private final int RECT = 1;
+    private final int OVAL = 2;
+    private final int FREE = 3;
+    private final int TEXT = 4;
+    final BoardServer boardServer;
+    private final String userID;
+    final JFrame mainFrame;
+    ArrayList<Shape> shapes = new ArrayList<>();
+    private Point startPoint = new Point(5, 10);
+    private int currentShape = LINE;
+    private int currentMode = UNFILLED;
+    private Color currentColor = getForeground();
+    private boolean erasing = false;
+    private int eraserSize = 1;
+    private ArrayList<Point> points;
+    private ArrayList<String> textInput;
 
     public SharedPanel(BoardServer bServer, String uID, JFrame frame) {
         boardServer = bServer;
@@ -246,44 +246,61 @@ public class SharedPanel extends JPanel implements ActionListener, KeyListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String action = e.getActionCommand();
-        if (action.equals("NewBoard")) {
-            newBoard();
-        } else if (action.equals("OpenFile")) {
-            loadBoard();
-        } else if (action.equals("SaveAs")) {
-            saveBoard();
-        } else if (action.equals("com.walidmoustafa.board.gui.Line")) {
-            currentShape = LINE;
-        } else if (action.equals("Rectangle")) {
-            currentShape = RECT;
-        } else if (action.equals("com.walidmoustafa.board.gui.Oval")) {
-            currentShape = OVAL;
-        } else if (action.equals("Free Hand")) {
-            currentShape = FREE;
-        } else if (action.equals("com.walidmoustafa.board.gui.Text")) {
-            currentShape = TEXT;
-        } else if (action.equals("Colors")) {
-            currentColor = JColorChooser.showDialog(this, "Fill Color...", getForeground());
-        } else if (action.equals("Unfilled")) {
-            currentMode = UNFILLED;
-        } else if (action.equals("Filled")) {
-            currentMode = FILLED;
-        } else if (action.equals("ToggleErase")) {
-            erasing = !erasing;
-        } else if (action.equals("Small")) {
-            eraserSize = 1;
-        } else if (action.equals("Medium")) {
-            eraserSize = 2;
-        } else if (action.equals("Large")) {
-            eraserSize = 3;
-        } else if (action.equals("About")) {
-            aboutApp();
+        switch (action) {
+            case "NewBoard":
+                newBoard();
+                break;
+            case "OpenFile":
+                loadBoard();
+                break;
+            case "SaveAs":
+                saveBoard();
+                break;
+            case "com.walidmoustafa.board.gui.Line":
+                currentShape = LINE;
+                break;
+            case "Rectangle":
+                currentShape = RECT;
+                break;
+            case "com.walidmoustafa.board.gui.Oval":
+                currentShape = OVAL;
+                break;
+            case "Free Hand":
+                currentShape = FREE;
+                break;
+            case "com.walidmoustafa.board.gui.Text":
+                currentShape = TEXT;
+                break;
+            case "Colors":
+                currentColor = JColorChooser.showDialog(this, "Fill Color...", getForeground());
+                break;
+            case "Unfilled":
+                currentMode = UNFILLED;
+                break;
+            case "Filled":
+                currentMode = FILLED;
+                break;
+            case "ToggleErase":
+                erasing = !erasing;
+                break;
+            case "Small":
+                eraserSize = 1;
+                break;
+            case "Medium":
+                eraserSize = 2;
+                break;
+            case "Large":
+                eraserSize = 3;
+                break;
+            case "About":
+                aboutApp();
+                break;
         }
     }
 
-    public void newBoard() {
+    private void newBoard() {
         BoardEvent event = new BoardEvent("loadBoard");
-        event.shapes = new ArrayList<Shape>();
+        event.shapes = new ArrayList<>();
         try {
             boardServer.addBoardEvent(event);
         } catch (RemoteException e1) {
@@ -292,7 +309,7 @@ public class SharedPanel extends JPanel implements ActionListener, KeyListener {
     }
 
     @SuppressWarnings("unchecked")
-    public void loadBoard() {
+    private void loadBoard() {
         JFileChooser chooser = new JFileChooser();
         FileFilter[] filefilters = chooser.getChoosableFileFilters();
         for (FileFilter filter : filefilters) {
@@ -327,7 +344,7 @@ public class SharedPanel extends JPanel implements ActionListener, KeyListener {
         }
     }
 
-    public void saveBoard() {
+    private void saveBoard() {
         JFileChooser chooser = new JFileChooser();
         FileFilter[] filefilters = chooser.getChoosableFileFilters();
         for (FileFilter filter : filefilters) {
@@ -358,13 +375,13 @@ public class SharedPanel extends JPanel implements ActionListener, KeyListener {
     public void keyTyping(KeyEvent e) {
         if (currentShape == TEXT) {
             if (textInput == null) {
-                textInput = new ArrayList<String>();
-                textInput.add(new String());
+                textInput = new ArrayList<>();
+                textInput.add("");
             }
 
             char c = e.getKeyChar();
             if (c == '\n') {
-                textInput.add(new String());
+                textInput.add("");
             } else {
                 int lastLine = textInput.size() - 1;
                 String lastStr = textInput.get(lastLine);
@@ -390,7 +407,7 @@ public class SharedPanel extends JPanel implements ActionListener, KeyListener {
     public void keyReleased(KeyEvent e) {
     }
 
-    public void aboutApp() {
+    private void aboutApp() {
         JOptionPane.showMessageDialog(mainFrame, "Distributed Board\nBy: Walid Moustafa\nMIT\nMelbourne University",
                 "About Shared Board", JOptionPane.INFORMATION_MESSAGE);
     }
@@ -420,7 +437,7 @@ public class SharedPanel extends JPanel implements ActionListener, KeyListener {
         public void mousePressed(MouseEvent e) {
             startPoint = e.getPoint();
             if (erasing || (currentShape == FREE)) {
-                points = new ArrayList<Point>();
+                points = new ArrayList<>();
             }
         }
 
